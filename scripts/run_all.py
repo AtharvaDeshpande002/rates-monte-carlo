@@ -148,6 +148,11 @@ def main():
     ax.legend()
     save(fig, FIG / "03_stationary_distribution.png", "Stationary density from the Fokker-Planck equation of the OU process: N(theta, sigma^2 / 2kappa).")
     res["stationary"] = dict(sd=stat_sd, p_negative=float(norm.cdf(0, th, stat_sd)))
+    rep.add_image("Stationary distribution vs SOFR history",
+                  f"The Fokker-Planck stationary law of the OU process, N(theta, sigma^2/2kappa), against "
+                  f"the empirical distribution of SOFR. Real rates cluster at policy levels; the Gaussian puts "
+                  f"{norm.cdf(0, th, stat_sd)*100:.1f}% probability below zero.",
+                  "figures/03_stationary_distribution.png")
 
     # ------------------------------------------------------------------ 3. MC accuracy
     T = 2.0
@@ -293,6 +298,8 @@ def main():
     rep.add_table("6. Scenario probabilities: history-based model vs market-implied steps",
                   "Probability that the overnight rate is at least 25bp / 50bp higher, or 25bp lower, "
                   "than today at each horizon.", probs.round(3))
+    rep.add_image("Scenario probabilities chart", "Probability of at least +50bp, or at least a 25bp cut, by horizon.",
+                  "figures/06_scenario_probabilities.png")
 
     # ------------------------------------------------------------------ 6. pricing
     pc = cfg["pricing"]
@@ -372,6 +379,8 @@ def main():
     rep.add_table("8. One-month VaR and Expected Shortfall (long 1 SR3 contract, USD)",
                   "Parametric Monte Carlo under Vasicek vs historical simulation of 21-day SOFR changes.",
                   risk_tbl.round(1))
+    rep.add_image("P&L distribution", "Historical 21-day changes are peaked with fat tails; dashed lines mark 99% Expected Shortfall.",
+                  "figures/08_var_es.png")
 
     rep.write(ROOT / "reports" / "report.html")
     with open(ROOT / "reports" / "results.json", "w") as f:

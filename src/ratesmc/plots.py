@@ -52,13 +52,20 @@ class Report:
         self.sections.append(dict(h=heading, p=text, data=data, layout=base))
 
     def add_table(self, heading: str, text: str, df):
-        self.sections.append(dict(h=heading, p=text, table=df.to_html(index=False,
-                                  float_format=lambda x: f"{x:,.4g}", border=0)))
+        self.sections.append(dict(h=heading, p=text, table=df.to_html(index=False, na_rep="–",
+                                  float_format=lambda x: f"{x:,.4g}" if abs(x) < 1e4 else f"{x:,.0f}",
+                                  border=0)))
+
+    def add_image(self, heading: str, text: str, src: str):
+        """A static chart (PNG) for figures that read best as a single picture."""
+        self.sections.append(dict(h=heading, p=text, img=src))
 
     def write(self, path):
         parts = []
         for i, s in enumerate(self.sections):
-            if "table" in s:
+            if "img" in s:
+                parts.append(f'<section><h2>{s["h"]}</h2><p>{s["p"]}</p><img src="{s["img"]}" alt="{s["h"]}" style="max-width:100%"></section>')
+            elif "table" in s:
                 parts.append(f'<section><h2>{s["h"]}</h2><p>{s["p"]}</p><div class="tbl">{s["table"]}</div></section>')
             else:
                 parts.append(
