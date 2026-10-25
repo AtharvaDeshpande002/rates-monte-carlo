@@ -1,0 +1,6 @@
+data/raw/*.csv
+data/interim/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/

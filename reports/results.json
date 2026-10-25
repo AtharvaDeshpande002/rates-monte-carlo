@@ -1,0 +1,209 @@
+{
+  "data": {
+    "sofr_obs": 2137,
+    "sofr_start": "2018-04-03",
+    "sofr_end": "2026-10-22",
+    "r0": 0.039,
+    "spikes_removed": [
+      "2019-09-17",
+      "2019-09-30"
+    ]
+  },
+  "vasicek": {
+    "kappa": 0.11159773778573172,
+    "theta": 0.048820129575048526,
+    "sigma": 0.00951785943002318,
+    "se_kappa": 0.17034091298993947,
+    "se_theta": 0.04442778227794386,
+    "se_sigma": 0.00014565639195391876,
+    "half_life_years": 6.211122145601121,
+    "kappa_ci95": [
+      -0.22227045167454962,
+      0.4454659272460131
+    ],
+    "sigma_raw": 0.01662567492321892,
+    "ols_kappa": 0.11159809038389809
+  },
+  "cir": {
+    "kappa": 0.05844551094450581,
+    "theta": 0.06872148987091908,
+    "sigma": 0.08757847408950245,
+    "loglik": 12861.536791862996,
+    "n": 2136,
+    "feller": true,
+    "lr_vs_vasicek": 88.58414668177284
+  },
+  "stationary": {
+    "sd": 0.02014636013153545,
+    "p_negative": 0.007690682437399949
+  },
+  "convergence": {
+    "exact_bond_2y": 0.9231764126549109,
+    "se_plain_100k": 4.200510826866741e-05,
+    "se_antithetic_100k": 5.983068085333237e-07,
+    "se_control_100k": 4.268286582199648e-07,
+    "variance_reduction_antithetic": 4928.971725680616,
+    "variance_reduction_control": 9684.943120173531,
+    "plain_slope": -0.5015048486822875
+  },
+  "discretisation": {
+    "euler_weak_order": 0.9477735022644269,
+    "cir_euler_strong_order": 0.6517964720688294,
+    "cir_milstein_strong_order": 1.0651904815041986
+  },
+  "fomc": [
+    {
+      "meeting": "2026-10-28",
+      "t": 0.0164,
+      "exp_change_bp": 2.1483,
+      "lower_bp": 0.0,
+      "upper_bp": 25.0,
+      "p_upper": 0.0859,
+      "exp_rate_after": 0.0392
+    },
+    {
+      "meeting": "2026-12-09",
+      "t": 0.1314,
+      "exp_change_bp": 18.945,
+      "lower_bp": 0.0,
+      "upper_bp": 25.0,
+      "p_upper": 0.7578,
+      "exp_rate_after": 0.0411
+    },
+    {
+      "meeting": "2027-01-27",
+      "t": 0.2656,
+      "exp_change_bp": 2.2943,
+      "lower_bp": 0.0,
+      "upper_bp": 25.0,
+      "p_upper": 0.0918,
+      "exp_rate_after": 0.0413
+    },
+    {
+      "meeting": "2027-03-17",
+      "t": 0.3997,
+      "exp_change_bp": 4.8072,
+      "lower_bp": 0.0,
+      "upper_bp": 25.0,
+      "p_upper": 0.1923,
+      "exp_rate_after": 0.0418
+    }
+  ],
+  "hw_reprice_error_bp": 0.0,
+  "scenarios": [
+    {
+      "horizon": "Dec-2026",
+      "model": "Vasicek (history)",
+      "p_hike_25plus": 0.385,
+      "p_hike_50plus": 0.17,
+      "p_cut_25plus": 0.349,
+      "mean_change_bp": 1.941,
+      "sd_bp": 37.341
+    },
+    {
+      "horizon": "Dec-2026",
+      "model": "FOMC step (market)",
+      "p_hike_25plus": 0.777,
+      "p_hike_50plus": 0.068,
+      "p_cut_25plus": 0.0,
+      "mean_change_bp": 21.095,
+      "sd_bp": 13.25
+    },
+    {
+      "horizon": "Jun-2027",
+      "model": "Vasicek (history)",
+      "p_hike_25plus": 0.468,
+      "p_hike_50plus": 0.343,
+      "p_cut_25plus": 0.402,
+      "mean_change_bp": 7.015,
+      "sd_bp": 75.877
+    },
+    {
+      "horizon": "Jun-2027",
+      "model": "FOMC step (market)",
+      "p_hike_25plus": 0.902,
+      "p_hike_50plus": 0.509,
+      "p_cut_25plus": 0.0,
+      "mean_change_bp": 39.959,
+      "sd_bp": 23.504
+    },
+    {
+      "horizon": "Dec-2027",
+      "model": "Vasicek (history)",
+      "p_hike_25plus": 0.496,
+      "p_hike_50plus": 0.397,
+      "p_cut_25plus": 0.406,
+      "mean_change_bp": 11.737,
+      "sd_bp": 97.605
+    },
+    {
+      "horizon": "Dec-2027",
+      "model": "FOMC step (market)",
+      "p_hike_25plus": 0.966,
+      "p_hike_50plus": 0.797,
+      "p_cut_25plus": 0.0,
+      "mean_change_bp": 63.781,
+      "sd_bp": 31.661
+    }
+  ],
+  "caplet": {
+    "closed_form": 0.0008608066205069701,
+    "mc": [
+      {
+        "n": 10000,
+        "price": 0.0008633650494526989,
+        "se": 1.2315858112912785e-05
+      },
+      {
+        "n": 100000,
+        "price": 0.0008675231947212137,
+        "se": 3.891184177517261e-06
+      }
+    ],
+    "strike": 0.045,
+    "expiry": 1.0,
+    "tenor": 0.25,
+    "price_bp_running": 34.4322648202788
+  },
+  "convexity": {
+    "at_1y": 0.4775951627963651,
+    "at_2y": 1.491319542280059,
+    "at_5y": 5.7831139815761645,
+    "mc_checks": [
+      {
+        "T1": 0.5,
+        "mc_bp": 0.15380544806167795,
+        "se_bp": 4.1522276279194966e-15,
+        "formula_bp": 0.15380544806092056
+      },
+      {
+        "T1": 1.0,
+        "mc_bp": 0.47759516279499703,
+        "se_bp": 4.14755134477879e-15,
+        "formula_bp": 0.4775951627963651
+      },
+      {
+        "T1": 2.0,
+        "mc_bp": 1.4913195422787406,
+        "se_bp": 4.125858326984129e-15,
+        "formula_bp": 1.491319542280059
+      }
+    ]
+  },
+  "risk": [
+    {
+      "method": "Monte Carlo (Vasicek)",
+      "VaR95": 1077.1,
+      "ES95": 1350.7,
+      "VaR99": 1524.7,
+      "ES99": 1745.7
+    },
+    {
+      "method": "Historical (2018-2026)",
+      "VaR95": 1176.7,
+      "ES95": 1654.0,
+      "VaR99": 1812.1,
+      "ES99": 1850.5
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+# All parameters for the project live here. Nothing is hard-coded in the code.
+
+data:
+  raw_dir: data/raw
+  sofr_file: SOFR.csv            # FRED series SOFR (percent, daily)
+  effr_file: EFFR.csv            # FRED series EFFR (percent, daily)
+  curve_file: treasury_curve_2026-10-22.csv   # FRED DGS1MO..DGS2 on the as-of date
+  as_of: "2026-10-22"
+
+calibration:
+  dt_years: 0.003968253968253968   # 1/252: one business day
+  main_series: SOFR
+  trim_sofr_spike: true            # winsorise the Sep-2019 repo spike and month-end prints
+  winsor_bp: 50                    # daily moves above this are treated as data spikes
+  rolling_window_days: 504         # 2-year rolling calibration
+  rolling_step_days: 21
+
+monte_carlo:
+  seed: 20261025
+  horizon_years: 2.0
+  steps_per_year: 252
+  n_paths_fan: 20000
+  n_grid: [500, 1000, 2000, 5000, 10000, 20000, 50000, 100000]
+  dt_grid_per_year: [4, 12, 52, 252]
+
+pricing:
+  # Hull-White parameters for the option and convexity demonstrations.
+  # A desk would calibrate these to cap/swaption volatilities; here we use
+  # history-based values (documented in the README).
+  hw_a: 0.15                   # mean-reversion speed (1/yr)
+  hw_sigma_bp: 100             # normal volatility of the short rate (bp per sqrt(yr))
+  caplet_expiry_years: 1.0
+  caplet_tenor_years: 0.25
+  caplet_strike_pct: 4.50
+  convexity_max_years: 5.0
+
+fomc:
+  step_bp: 25
+  noise_bp: 3                  # day-to-day noise of SOFR around the policy rate (bp)
+  # Decision dates. 2026 dates are the Fed's published schedule; 2027-2028 dates are
+  # ASSUMED (typical calendar) because the official schedule was not available.
+  meetings:
+    - "2026-10-28"
+    - "2026-12-09"
+    - "2027-01-27"
+    - "2027-03-17"
+    - "2027-04-28"
+    - "2027-06-16"
+    - "2027-07-28"
+    - "2027-09-22"
+    - "2027-11-03"
+    - "2027-12-15"
+    - "2028-01-26"
+    - "2028-03-15"
+    - "2028-04-26"
+    - "2028-06-14"
+    - "2028-07-26"
+    - "2028-09-20"
+
+risk:
+  horizon_days: 21
+  sr3_start_years: 0.5       # the SR3 contract whose reference quarter starts in ~6 months
+  dollars_per_bp: 25
+  levels: [0.95, 0.99]
